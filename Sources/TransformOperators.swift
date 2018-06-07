@@ -453,7 +453,7 @@ public func >>> <Transform: TransformType>(left: Set<Transform.Object>?, right: 
 
 private func fromJSONArrayWithTransform<Transform: TransformType>(_ input: Any?, transform: Transform) -> [Transform.Object]? {
 	if let values = input as? [Any] {
-		return values.flatMap { value in
+		return values.compactMap { value in
 			return transform.transformFromJSON(value)
 		}
 	} else {
@@ -472,7 +472,7 @@ private func fromJSONDictionaryWithTransform<Transform: TransformType>(_ input: 
 }
 
 private func toJSONArrayWithTransform<Transform: TransformType>(_ input: [Transform.Object]?, transform: Transform) -> [Transform.JSON]? {
-	return input?.flatMap { value in
+	return input?.compactMap { value in
 		return transform.transformToJSON(value)
 	}
 }
